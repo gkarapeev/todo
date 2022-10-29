@@ -7,4 +7,4 @@ app.get('/', (req: Request, res: Response) => {
     res.sendFile(join(__dirname, '../dist/index.html'));
 });
 
-app.listen(3000, () => console.log('Sverver running on port 3000'));
+app.listen(3000, () => console.log('Sverver running on port 3000.'));

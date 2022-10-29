@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/server.js",
-    "dev": "nodemon backend/server.ts",
-    "test": "echo \"No tests present\"",
-    "build": "tsc"
+    "start:ts": "tsc -project tsconfig.be.json -w",
+    "start:js": "nodemon backend/server.js"
   },
   "keywords": [],
   "author": "",
