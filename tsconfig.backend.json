@@ -1,7 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "outDir": "backend/dist",
-  },
-  "exclude": [ "frontend" ]
-}
