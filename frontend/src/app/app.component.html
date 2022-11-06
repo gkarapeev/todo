@@ -1,1 +1,9 @@
-<span id="message">Hi, visitor!</span>
+<div id="title">
+    <h1>TODOS:</h1>
+</div>
+<div id="todos_container">
+    <div class="todo" *ngFor="let todo of todos">
+        <span class="id">{{ todo.todo_id }}</span>
+        <span class="title">{{ todo.description }}</span>
+    </div>
+</div>
