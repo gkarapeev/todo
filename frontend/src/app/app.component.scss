@@ -12,6 +12,12 @@ $width: 600px;
 #new-todo-control {
     display: flex;
     justify-content: space-between;
+    &:hover,
+    &:focus-within {
+        & #add-todo {
+            background-color: lighten(#2b9976, 5%);
+        }
+    }
 }
 
 #scroller {
@@ -46,6 +52,7 @@ $width: 600px;
 
     &:hover {
         border: 1px solid darken(#cddbe7, 10%);
+        border-right: none;
     }
 
     &:focus {
@@ -55,15 +62,16 @@ $width: 600px;
 }
 
 #add-todo {
+    $green: #2b9976;
     height: 40px;
     width: 60px;
-    background-color: #2b9976;
+    background-color: desaturate(lighten($green,  25%), 20%);
     display: flex;
     justify-content: center;
     align-items: center;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    transition: all 0.25s ease-out;
+    transition: all 0.18s ease-out;
 
     #plus {
         font-weight: 300;
