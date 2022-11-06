@@ -16,19 +16,16 @@ const express_1 = __importDefault(require("express"));
 const path_1 = require("path");
 const cors_1 = __importDefault(require("cors"));
 const db_1 = __importDefault(require("./db"));
-const poolche = db_1.default;
 const app = (0, express_1.default)();
 app.use(express_1.default.static((0, path_1.join)(__dirname, '../../frontend/dist')));
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-// app.get('/', (req: Request, res: Response) => {
-//     res.sendFile(join(__dirname, '../../frontend/dist/index.html'));
-// });
-// TODO ROUTES
+// ROUTES
 // Create a todo
 app.post("/todos", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newTodo = yield db_1.default.query(`INSERT INTO todo (description) VALUES($1) RETURNING *`, [req.body.description]);
+        const { description } = req.body;
+        const newTodo = yield db_1.default.query(`INSERT INTO todo(description) VALUES('${description}') RETURNING *;`);
         res.json(newTodo.rows[0]);
     }
     catch (err) {
@@ -61,7 +58,7 @@ app.put("/todos/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const { id } = req.params;
         const description = req.body.description;
         // const todo = await pool.query(`UPDATE todo SET description = ${description} WHERE todo_id = ${id};`);
-        const todo = yield db_1.default.query(`UPDATE todo SET description = $1 WHERE todo_id = $2;`, [description, id]);
+        const todo = yield db_1.default.query(`UPDATE todo SET description = '${description}' WHERE todo_id = '${id}';`);
         res.json(todo.rows[0]);
     }
     catch (err) {
@@ -71,8 +68,9 @@ app.put("/todos/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* 
 // Delete a todo
 app.delete("/todos/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const todo = yield db_1.default.query(`DELETE FROM todo WHERE todo_id = ${id};`);
-        res.json(`Todo #${req.params.id} was deleted.`);
+        const { id } = req.params;
+        yield db_1.default.query(`DELETE FROM todo WHERE todo_id = ${id};`);
+        res.json(`Todo #${id} was deleted.`);
     }
     catch (err) {
         console.error(err.message);
