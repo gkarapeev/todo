@@ -30,6 +30,19 @@ export class AppComponent {
       });
   }
 
+  public editTodo(id: string, inp: HTMLInputElement): void {
+    fetch(`http://192.168.1.15:3000/todos/${id}`,
+      {
+        method: 'PUT',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ description: inp.value })
+      })
+      .then(() => {
+        inp.value = '';
+        this.fetchTodos();
+      });
+  }
+
   public deleteTodo(id: string): void {
     fetch(`http://192.168.1.15:3000/todos/${id}`, { method: 'DELETE' })
       .then(res => res.json())
